@@ -1,10 +1,19 @@
 from alpha_vantage.timeseries import TimeSeries
 import sys
+import os
+import pymongo
 import requests
 from pprint import pprint
 
 
-def update_symbols():
+def connect_mongo():
+    mongo_conn = os.environ['MONGO_CONN']
+    conn = pymongo.MongoClient(mongo_conn)
+    db = conn['us_stock']
+    return db
+
+
+def opt_update_symbols():
     def assemble_url(market):
         return f'https://old.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange={market}&render=download'
 
@@ -26,12 +35,15 @@ def update_symbols():
             symbol = company.split(',')[0].strip('"')
 
             if symbol:
-                symbol_pool.append(symbol)
+                symbol_pool.append({'name': symbol})
 
-    symbol_pool.sort()
+    db = connect_mongo()
+    collection = db['symbol']
+    collection.insert_many(symbol_pool)
+    pprint(len(symbol_pool))
 
 
-def fetch_data():
+def opt_fetch_data():
     app = TimeSeries()
     data, meta_data = app.get_intraday('AAL')
     pprint(meta_data)
@@ -41,6 +53,6 @@ if __name__ == '__main__':
     opt = sys.argv[1]
 
     if opt == 'update_symbols':
-        update_symbols()
+        opt_update_symbols()
     elif opt == 'fetch_data':
-        fetch_data()
+        opt_fetch_data()
