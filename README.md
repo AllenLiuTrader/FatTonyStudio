@@ -1,2 +1,6 @@
 # iCrystalBall
-My magic item to forsee the finance markets.
+My magic item to foresee the finance markets.
+
+## Resources
+
+- [US Stock Company List](https://old.nasdaq.com/screening/company-list.aspx)
