@@ -9,3 +9,8 @@ My magic item to foresee the finance markets.
 
 - Python
 - MongoDB
+
+## Environment Variables
+
+- ALPHAVANTAGE_API_KEY
+- MONGO_CONN
