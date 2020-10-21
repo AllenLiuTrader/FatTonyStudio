@@ -60,8 +60,8 @@ def call_fmp_api(obj, symbols, params):
     return record
 
 
-def call_alphavintage_api(params):
-    api_key = os.environ['ALPHAVANTAGE_API_KEY']
+def call_alpha_vantage_api(params):
+    api_key = os.environ['ALPHA_VANTAGE_API_KEY']
     url = f"https://www.alphavantage.co/query?apikey={api_key}"
     query = ''
 
