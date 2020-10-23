@@ -1,4 +1,4 @@
-# iCapitalHQ
+# FatTony
 
 ## Tech Stack
 
